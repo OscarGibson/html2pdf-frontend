@@ -1,0 +1,15 @@
+/* navbar */
+.custom-navbar-right {
+  height: 50px;
+}
+.custom-navbar-right .btn {
+  margin-top: 8px;
+}
+.nav-user-name {
+  padding: 6px 10px;
+  color: #fff;
+  float: left;
+}
+.nav-user-name span {
+  text-transform: capitalize;
+}

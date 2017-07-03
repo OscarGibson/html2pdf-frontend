@@ -1,0 +1,28 @@
+footer {
+  width: 100%;
+}
+.footer-content {
+  background-color: #101010;
+}
+.footer-container {
+  padding: 30px;
+}
+.footer-content .footer-left {
+  color: #c1c1c1;
+
+}
+.footer-left, .footer-right {
+  margin-top: 10px;
+  margin-bottom: 20px
+}
+.list-group .list-group-item {
+  background-color: #101010;
+  color: #c1c1c1;
+}
+footer .footer-bottom {
+  height: 50px;
+  background-color: #000;
+  color: #a8a8a8;
+  padding-top: 13px;
+  border-top: 1px solid #c1c1c1;
+}

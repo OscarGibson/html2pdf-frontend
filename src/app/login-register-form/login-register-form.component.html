@@ -1,0 +1,171 @@
+<div *ngIf="!IsUserLogIn()" class="login-form-bg">
+  <div class="login-register-form-box col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12">
+    <!--<div class="close-form" (click)='ngShowLoginForm($event)'>
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </div>-->
+
+    <ul class="nav nav-tabs login-register-tab">
+      <li target="login-form-box"
+      role="presentation"
+      class="active"
+      name="nav-tab-button"
+      (click)="FormsTabShow($event)">
+      <a href="#">Login</a>
+    </li>
+      <li target="register-form-box"
+      role="presentation"
+      name="nav-tab-button"
+      (click)="FormsTabShow($event)">
+      <a href="#">Register</a>
+    </li>
+    </ul>
+
+    <div id="login-form-box" class="forms-boxes">
+
+      <form
+      #loginForm='ngForm'
+      (ngSubmit)='LoginByUserName(loginForm)'
+      class="login-form text-center"
+      >
+        <div class="form-group">
+          <input type="text" class="form-control" id="username"
+          aria-describedby="basic-addon1"
+          name="username" [(ngModel)]='loginFormModel.username'
+          required #username='ngModel'
+          placeholder="Username"
+          maxlength="30">
+          <div class="alert alert-danger" *ngIf="username.errors && (username.dirty || username.touched)">
+            <div [hidden]="!username.errors.required">
+              Name is required
+            </div>
+            <div [hidden]="!username.errors.maxlength">
+              Name is too long
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input type="password" class="form-control"
+          placeholder="Password" aria-describedby="basic-addon1"
+          name="password" [(ngModel)]='loginFormModel.password'
+          required #password='ngModel'
+          minlength="8" maxlength="30" pattern="^.*(?=.{8,})(?=.*[a-z])[a-zA-Z0-9@#$%^&+=]*$">
+          <div class="alert alert-danger" *ngIf="password.errors && (password.dirty || password.touched)">
+            <div [hidden]="!password.errors.required">
+              Password is required
+            </div>
+            <div [hidden]="!password.errors.minlength">
+              Password is too sort
+            </div>
+            <div [hidden]="!password.errors.maxlength">
+              Password is too long
+            </div>
+            <div [hidden]="!password.errors.pattern">
+              Password must contain digits and letters
+            </div>
+          </div>
+        </div>
+        <div class="form-group"><hr></div>
+        <div class="form-group text-centers login-button-box">
+          <button [disabled]="!loginForm.form.valid" class="btn btn-success">Login</button>
+        </div>
+        <h5 class="or-separator">OR</h5>
+
+      </form>
+
+      <div class="text-center fb-button">
+        <button class="btn btn-primary btn-facebook">
+          <i class="fa fa-facebook facebook-login-icon" aria-hidden="true"></i>
+          <div class="facebook-login-text text-center">Login via facebook</div>
+        </button>
+      </div>
+
+    </div>
+
+    <div id="register-form-box" class="form-inactive forms-boxes">
+      <form
+      #registerForm='ngForm'
+      (ngSubmit)='Register(registerForm)'
+      class="register-form text-center"
+      >
+        <div class="form-group">
+          <input type="text" class="form-control" id="login"
+          aria-describedby="basic-addon1"
+          name="login" [(ngModel)]='registerFormModel.login'
+          required #login='ngModel'
+          placeholder="Login"
+          maxlength="30">
+          <div class="alert alert-danger" *ngIf="login.errors && (login.dirty || login.touched)">
+            <div [hidden]="!login.errors.required">
+              Login is required
+            </div>
+            <div [hidden]="!login.errors.maxlength">
+              Login is too long
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input type="email" class="form-control"
+          aria-describedby="basic-addon1"
+          name="email" [(ngModel)]='registerFormModel.email'
+          required #email='ngModel'
+          placeholder="Email"
+          pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$'>
+          <div class="alert alert-danger" *ngIf="email.errors && (email.dirty || email.touched)">
+            <div [hidden]="!email.errors.pattern">
+              Invalid email
+            </div>
+            <div [hidden]="!email.errors.required">
+              Email is required
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input type="password" class="form-control"
+          placeholder="Password" aria-describedby="basic-addon1"
+          name="passw" [(ngModel)]='registerFormModel.password'
+          required #passw='ngModel'
+          minlength="8" maxlength="30" pattern="^.*(?=.{8,})(?=.*[a-z])[a-zA-Z0-9@#$%^&+=]*$">
+          <div class="alert alert-danger" *ngIf="passw.errors && (passw.dirty || passw.touched)">
+            <div [hidden]="!passw.errors.required">
+              Password is required
+            </div>
+            <div [hidden]="!passw.errors.minlength">
+              Password is too sort
+            </div>
+            <div [hidden]="!passw.errors.maxlength">
+              Password is too long
+            </div>
+            <div [hidden]="!passw.errors.pattern">
+              Password must contain digits and letters
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input type="password" class="form-control"
+          placeholder="Password repeat" aria-describedby="basic-addon1"
+          name="passwrepeat" [(ngModel)]='registerFormModel.passwordrepeat'
+          required pattern="{{ passw.value }}" #passwrepeat='ngModel'>
+          <div class="alert alert-danger" *ngIf="passwrepeat.errors && (passwrepeat.dirty || passwrepeat.touched)">
+            <div [hidden]="!passwrepeat.errors.required">
+              Password repeat is required
+            </div>
+            <div *ngIf="passwrepeat.errors.pattern">
+              Password don't mutch
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group"><hr></div>
+        <div class="form-group text-centers login-button-box">
+          <button [disabled]="!registerForm.form.valid" class="btn btn-success">Sing In</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<app-navbar></app-navbar>
+<router-outlet *ngIf="IsUserLogIn()"></router-outlet>

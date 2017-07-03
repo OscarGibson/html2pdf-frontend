@@ -1,0 +1,76 @@
+<div class="content create-project-content">
+      <div class="row" style="margin: 0;">
+        <div class="left-nav col-md-2 col-sm-3 col-xs-12">
+          <div class="panel panel-default panel-left" [ngClass]="{ 'vertical-toggle' : IsVertToggled()}">
+            <div class="panel-heading panel-collapse-button" id="panel-top-button">
+              Projects
+              <span class="collapse-icon glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+            </div>
+            <div class="panel-body">
+              <ul *ngFor="let project of projectList">
+                <li><a (click)="getProjectDetail(project.pk)"
+                  name="{{ project.pk }}">
+                  {{ project.name }}
+                </a></li>
+              </ul>
+            </div>
+            <div (click)="ToggleVertPanel()" class="panel-footer panel-collapse-button" id="panel-bottom-button">
+              <span class="collapse-icon glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+            </div>
+          </div>
+        </div>
+        <div class="main-window col-md-10 col-sm-9 col-xs-12">
+          <div id="html-area" class="main-text-area work-area" ace-editor
+           [(text)]="htmlText"
+           [mode]="'html'"
+           [theme]=""
+           [options]="options"
+           [readOnly]="false"
+           [autoUpdateContent]="true"
+           [durationBeforeCallback]="1000"
+           ></div>
+
+          <div id="css-area" class="main-text-area work-area area-inactive" ace-editor
+           [(text)]="cssText"
+           [mode]="'css'"
+           [theme]="'eclipse'"
+           [options]="options"
+           [readOnly]="false"
+           [autoUpdateContent]="true"
+           [durationBeforeCallback]="1000"
+           ></div>
+
+          <div id="view-area" class="main-text-area iframe-box work-area area-inactive">
+            <iframe name="iframe-view" id="iframe-view" #iframeView
+            src="http://127.0.0.1:4200/assets/views-area.html" ></iframe>
+          </div>
+
+         <div class="panel panel-default">
+           <div class="panel-heading panel-bottom">
+             <button (click)="NewProject()"
+             class="btn btn-success">New</button>
+             <button (click)="SaveProject()"
+             class="btn btn-success">Save</button>
+             <button (click)="DownloadProject()"
+             class="btn btn-success">Download</button>
+           </div>
+         </div>
+
+        </div>
+
+        <div class="right-nav" [ngClass]="{ 'toggle' : IsToggled() }">
+          <button (click)="ToggleRightNav()" class="btn vertical-button">
+            <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><br>
+            <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+          </button>
+          <button target="view-area" class="btn right-nav-button"
+          (click)="changeArea($event)"
+          (click)="runHtml(iframeView, htmlText, cssText)"
+          >View</button>
+          <button target="html-area" class="btn right-nav-button"
+          (click)="changeArea($event)">HTML</button>
+          <button target="css-area" class="btn right-nav-button"
+          (click)="changeArea($event)">CSS</button>
+        </div>
+      </div>
+    </div>
