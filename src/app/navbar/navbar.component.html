@@ -22,7 +22,7 @@
       </ul>
       <div class="custom-navbar-right navbar-right">
         <h4 class="nav-user-name" *ngIf='GetUserName() && IsUserLogIn()'>Hello <span>{{ GetUserName() }}</span></h4>
-        <button *ngIf='!IsUserLogIn()' class="btn btn-success" (click)='ngShowLoginForm($event)'>
+        <button *ngIf='!IsUserLogIn()' class="btn btn-success" (click)='LogIn($event)'>
           LogIn/Register
         </button>
         <button *ngIf='IsUserLogIn()' class="btn btn-success" (click)='LogOut($event)'>

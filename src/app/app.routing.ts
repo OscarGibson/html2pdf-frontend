@@ -3,24 +3,25 @@ import { RouterModule, Routes } from '@angular/router'
 
 import { HomeContentComponent } from './home-content/home-content.component';
 import { WorkAreaComponent } from './work-area/work-area.component';
+import { LoginRegisterFormComponent } from './login-register-form/login-register-form.component'
 
 import { GlobalVariable } from './app.global'
+import { AuthGuard } from './_auth/auth.service'
 
 
 const appRoutes : Routes = [
   {
     path : GlobalVariable.innerLinks.Home.path,
-    component : HomeContentComponent,
-    data: {
-      loginReq: false
-    }
+    component : HomeContentComponent
   },
   {
     path : GlobalVariable.innerLinks.CreateProject.path,
     component : WorkAreaComponent,
-    data: {
-      loginReq: true
-    }
+    canActivate: [AuthGuard]
+  },
+  {
+    path: GlobalVariable.innerLinks.Auth.path,
+    component: LoginRegisterFormComponent
   }
 ]
 

@@ -39,7 +39,6 @@ export class WorkAreaComponent implements OnInit {
     private _env: EnvVar) { }
 
   ngOnInit() {
-    //console.log('test:', GlobalVariable.hostName)
     this.isToggled = false
     this.isVertToggled = false
 
@@ -140,7 +139,6 @@ export class WorkAreaComponent implements OnInit {
     }
     this.http.post(GlobalVariable.documentLinks.update, postData)
     .subscribe(data => {
-      console.log(data.json())
     },         error => {
       console.log(error)
     })
@@ -159,11 +157,9 @@ export class WorkAreaComponent implements OnInit {
     }
     this.http.post(GlobalVariable.documentLinks.download, postData)
     .subscribe(data => {
-      console.log(data)
       let pdf = new Blob([data.text()], {type: 'application/pdf'});
       let dataLocalUrl = this._sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(pdf))
       let simpleUrl = window.URL.createObjectURL(pdf)
-      console.log(dataLocalUrl)
       window.open(simpleUrl, '_blank')
     },         error => {
       console.log(error)

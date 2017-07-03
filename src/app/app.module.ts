@@ -14,6 +14,7 @@ import { LoginRegisterFormComponent } from './login-register-form/login-register
 import { EnvVar } from './app.env';
 import { WorkAreaComponent } from './work-area/work-area.component';
 import { GlobalVariable } from './app.global';
+import { AuthGuard } from './_auth/auth.service'
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { GlobalVariable } from './app.global';
     AppRoutingModule
   ],
   providers: [LoginRegisterFormComponent, EnvVar,
-              ],
+              AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

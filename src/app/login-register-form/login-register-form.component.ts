@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy, Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions} from '@angular/http';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, Params, ActivatedRoute } from '@angular/router';
+
+import { LocationStrategy } from '@angular/common';
 
 import { LoginForm } from '../loginForm.model';
 import { RegisterForm } from '../registerForm.model';
@@ -17,13 +19,26 @@ import { GlobalVariable } from '../app.global';
 @Injectable()
 export class LoginRegisterFormComponent implements OnInit, OnDestroy {
   private req: any;
+  private returnUrl:string = GlobalVariable.innerLinks.Home.path;
 
   loginFormModel = new LoginForm('','')
   registerFormModel = new RegisterForm('','','','','','')
 
-  constructor(private http: Http, private _env: EnvVar) { }
+  constructor(private http: Http, private _env: EnvVar,
+  private route: ActivatedRoute,
+  private router: Router
+  ) { }
 
   ngOnInit() {
+
+    this.route
+      .queryParams
+      .subscribe(params => {
+        if (params['returnUrl']) {
+          this.returnUrl = params['returnUrl']
+        }
+      });
+
     let uname = localStorage.getItem('username')
     let token = localStorage.getItem('token')
     if (token) {
@@ -37,15 +52,7 @@ export class LoginRegisterFormComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.req.unsubscribe()
   }
-  IsUserLogIn():boolean {
-    let isUserLogIn:string = localStorage.getItem('isUserLogIn')
-    if (isUserLogIn == 'true') {
-      return true
-    }
-    if (isUserLogIn == 'false') {
-      return false
-    }
-  }
+
   GetUserName():string {
     return localStorage.getItem('username')
   }
@@ -63,7 +70,7 @@ export class LoginRegisterFormComponent implements OnInit, OnDestroy {
       this.req = this.http.post(GlobalVariable.getJsonLink('login'), postData)
       .subscribe(data => {
         localStorage.setItem('token',data.json().key)
-        window.location.reload()
+        //window.location.reload()
         this.LoginByToken(data.json().key)
       },         error => {
         console.log('error:',error)
@@ -86,14 +93,14 @@ export class LoginRegisterFormComponent implements OnInit, OnDestroy {
       //this.userName = response.json().username
       localStorage.setItem('username',response.json().username)
       localStorage.setItem('isUserLogIn','true')
-      console.log('true data')
+      this.router.navigate([this.returnUrl],{})
       return response.json()
     },         error => {
       localStorage.setItem('isUserLogIn','false')
       console.log('false error')
       return error
     },        () => {
-      console.log('true completed')
+      //console.log('true completed')
     })
   }
   LogOut() {
@@ -130,7 +137,6 @@ export class LoginRegisterFormComponent implements OnInit, OnDestroy {
     let targetName = currentTarget.attributes['target'].value
     let AllEl = document.getElementsByClassName('forms-boxes')
     let AllTabs = document.getElementsByName('nav-tab-button')
-    //console.log(AllEl)
     var list: Array<Element>
     for (let i = 0; i<AllEl.length && i<AllTabs.length; i++) {
       AllEl[i].classList.add('form-inactive')

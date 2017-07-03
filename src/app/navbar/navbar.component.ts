@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Http, Headers, RequestOptions} from '@angular/http';
 
+import { Router } from '@angular/router';
+
 import { LoginRegisterFormComponent } from
 '../login-register-form/login-register-form.component';
 
@@ -20,7 +22,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isUserLogIn: boolean;
   userName: string;
   constructor(private LRFC:LoginRegisterFormComponent,
-              private _env: EnvVar) {}
+              private _env: EnvVar,
+              private router: Router) {}
 
   menu:any = {
     'home': {
@@ -35,19 +38,27 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.isUserLogIn = this.IsUserLogIn()
     this.userName = localStorage.getItem('username')
-    console.log('menu:',this.menu)
   }
   ngOnDestroy() {
   }
 
   IsUserLogIn():boolean {
-    return this.LRFC.IsUserLogIn()
+    let isUserLogIn:string = localStorage.getItem('isUserLogIn')
+    if (isUserLogIn == 'true') {
+      return true
+    }
+    if (isUserLogIn == 'false') {
+      return false
+    }
   }
   GetUserName() {
-    return this.LRFC.GetUserName()
+    return localStorage.getItem('username')
   }
   LogOut(event:MouseEvent):void {
     this.LRFC.LogOut()
+  }
+  LogIn() {
+    this.router.navigate([GlobalVariable.innerLinks.Auth.path],{})
   }
 
 
