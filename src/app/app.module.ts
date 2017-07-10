@@ -14,7 +14,8 @@ import { LoginRegisterFormComponent } from './login-register-form/login-register
 import { EnvVar } from './app.env';
 import { WorkAreaComponent } from './work-area/work-area.component';
 import { GlobalVariable } from './app.global';
-import { AuthGuard } from './_auth/auth.service'
+import { AuthGuard } from './_auth/auth.service';
+import { ContactUsComponent } from './contact-us/contact-us.component'
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AuthGuard } from './_auth/auth.service'
     FooterComponent,
     HomeContentComponent,
     LoginRegisterFormComponent,
-    WorkAreaComponent
+    WorkAreaComponent,
+    ContactUsComponent
   ],
   imports: [
     BrowserModule,

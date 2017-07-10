@@ -84,11 +84,13 @@ export class LoginRegisterFormComponent implements OnInit, OnDestroy {
     headers.append('Accept', 'application/json');
     headers.append('Authorization', 'Token ' + token)
 
+    console.log('token',token)
+
     let options = new RequestOptions({
       headers: headers
     });
 
-    return this.http.get(GlobalVariable.getJsonLink('loginByToken'), options)
+    this.req = this.http.get(GlobalVariable.getJsonLink('loginByToken'), options)
     .subscribe(response => {
       //this.userName = response.json().username
       localStorage.setItem('username',response.json().username)
@@ -97,11 +99,12 @@ export class LoginRegisterFormComponent implements OnInit, OnDestroy {
       return response.json()
     },         error => {
       localStorage.setItem('isUserLogIn','false')
-      console.log('false error')
+      console.log('false error',error)
       return error
     },        () => {
       //console.log('true completed')
     })
+    console.log('req:',this.req)
   }
   LogOut() {
     localStorage.removeItem('token')

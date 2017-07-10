@@ -33,6 +33,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
     'createProject' : {
       'name' : GlobalVariable.innerLinks.CreateProject.name,
       'path' : GlobalVariable.innerLinks.CreateProject.path
+    },
+    'contactUs' : {
+      'name' : GlobalVariable.innerLinks.Contact.name,
+      'path' : GlobalVariable.innerLinks.Contact.path
     }
   }
   ngOnInit() {

@@ -19,7 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css"
       ],
       "scripts": [
         "../node_modules/ace-builds/src-min/ace.js",
@@ -27,7 +28,8 @@
         "../node_modules/ace-builds/src-min/theme-clouds.js",
         "../node_modules/ace-builds/src-min/theme-twilight.js",
         "../node_modules/ace-builds/src-min/mode-abc.js",
-        "../node_modules/ace-builds/src-min/mode-text.js"
+        "../node_modules/ace-builds/src-min/mode-text.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

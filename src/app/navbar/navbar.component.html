@@ -13,12 +13,12 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="{{ menu.home.path }}">
+        <li><a href="{{ menu.home.path }}">
           {{ menu.home.name }}</a></li>
         <li><a href="{{ menu.createProject.path }}">
           {{ menu.createProject.name }}</a></li>
-        <li><a href="">
-          Contact</a></li>
+        <li><a href="{{ menu.contactUs.path }}">
+          {{ menu.contactUs.name }}</a></li>
       </ul>
       <div class="custom-navbar-right navbar-right">
         <h4 class="nav-user-name" *ngIf='GetUserName() && IsUserLogIn()'>Hello <span>{{ GetUserName() }}</span></h4>

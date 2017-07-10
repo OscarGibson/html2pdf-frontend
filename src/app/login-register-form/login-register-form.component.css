@@ -23,6 +23,9 @@
   width: 50%;
   text-align: center;
 }
+.login-register-tab li a {
+  cursor: pointer;
+}
 .login-register-form-box .form-group {
   display: block;
   width: 80%;

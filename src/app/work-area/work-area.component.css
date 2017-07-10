@@ -8,10 +8,17 @@
 .panel-left {
   margin-bottom: 0;
   margin-top: 0;
-  transition: margin .3s;
 }
-.panel-left.vertical-toggle {
-  margin-top: -162px;
+.panel-left .panel-body {
+  transition: .3s;
+  overflow: hidden;
+}
+.panel-left .panel-body ul li {
+  cursor: pointer;
+}
+.panel-left .panel-body.vertical-toggle {
+  height: 0;
+  padding: 0;
 }
 .collapse-icon {
 

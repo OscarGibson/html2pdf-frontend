@@ -25,6 +25,10 @@ export const GlobalVariable = Object.freeze({
     'Auth': {
       'name' : 'Authorization',
       'path' : 'login'
+    },
+    'Contact': {
+      'name' : 'Contact us',
+      'path' : 'contact-us'
     }
   },
   getJsonLink(name: string) {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EnvVar } from '../app.env';
+import { GlobalVariable } from '../app.global';
 
 @Component({
   selector: 'app-footer',
@@ -12,15 +13,19 @@ export class FooterComponent implements OnInit {
 
   ngOnInit() {
   }
-  menu = {
+  menu:any = {
     'home': {
-      'name' : this._env.innerLinks['Home']['name'],
-      'path' : this._env.innerLinks['Home']['name']
+      'name' : GlobalVariable.innerLinks.Home.name,
+      'path' : GlobalVariable.innerLinks.Home.path
     },
     'createProject' : {
-      'name' : this._env.innerLinks['Create project']['name'],
-      'path' : this._env.innerLinks['Create project']['path']
+      'name' : GlobalVariable.innerLinks.CreateProject.name,
+      'path' : GlobalVariable.innerLinks.CreateProject.path
     },
+    'contactUs' : {
+      'name' : GlobalVariable.innerLinks.Contact.name,
+      'path' : GlobalVariable.innerLinks.Contact.path
+    }
   }
 
 }

@@ -1,14 +1,15 @@
 <div class="content create-project-content">
       <div class="row" style="margin: 0;">
         <div class="left-nav col-md-2 col-sm-3 col-xs-12">
-          <div class="panel panel-default panel-left" [ngClass]="{ 'vertical-toggle' : IsVertToggled()}">
-            <div class="panel-heading panel-collapse-button" id="panel-top-button">
+          <div class="panel panel-default panel-left">
+            <div (click)="ToggleVertPanel()" class="panel-heading panel-collapse-button" id="panel-top-button">
               Projects
               <span class="collapse-icon glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
             </div>
-            <div class="panel-body">
+            <div class="panel-body" [ngClass]="{ 'vertical-toggle' : IsVertToggled()}">
               <ul *ngFor="let project of projectList">
                 <li><a (click)="getProjectDetail(project.pk)"
+                       (click)="runHtml(iframeView, htmlText, cssText)"
                   name="{{ project.pk }}">
                   {{ project.name }}
                 </a></li>
